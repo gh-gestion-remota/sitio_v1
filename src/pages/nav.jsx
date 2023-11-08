@@ -1,40 +1,49 @@
-import { Link } from 'gatsby'
+// import { Link } from 'gatsby'
 import React from 'react'
 import styled from'styled-components'
 import scrollTo from 'gatsby-plugin-smoothscroll';
+import '@fontsource/rubik'
 
 const NavWrapper = styled.div`
+    font-family: 'Rubik', 'sans-serif';
     position: sticky;
     top: 0;
     display: grid;
     grid-template-columns: repeat(9, auto);
-    justify-content: right;
+    justify-content: center;
     gap: 10px;
     width: 100%;
     height: auto;
     padding: 10px 0px 10px 0px;
-    background-color: black;
+    background-color: white;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
     color: white;
+    z-index: 3;
     a, .nav-link-btn{
-        background-color: black;
-        color: white;
-        border: solid white 2px;
+        font-family: 'Rubik', 'sans-serif';
+        font-size: 16px;
+        background-color: transparent   ;
+        color: black;
+        border: solid black 2px;
+        border-radius: 8px;
         align-self: center;
         justify-self: center;
         padding: 10px 14px 10px 14px;
-        transition: 2.6s;
-        text-decoration-color: black;
+        transition: 1.2s;
+        text-decoration: underline 1px solid transparent;
+        text-underline-offset: 3px;
     }
     a:hover, .nav-link-btn:hover{
-        color: orange;
-        border: solid orange 2px;
+        box-shadow: 1.6px 1.6px 10px 1px rgba(0, 0, 0, 0.44);
+        // color: orange;
+        // border: solid orange 2px;
         transition-duration: 0.8s;
         cursor: pointer;
-        text-decoration: underline;
-        text-decoration-color: white;
+        text-decoration-color: black;
     }
     a:not(:hover), .nav-link-btn:not(:hover){
-        transition-duration: 0.4s;
+        transition-duration: 0.8s;
     }
     .padding{
         margin-right: 20px;
@@ -44,14 +53,13 @@ const NavWrapper = styled.div`
 const NavBar = () =>{
     return(
         <NavWrapper>
-            <Link to="/">Home</Link>
-            <button className='nav-link-btn' onClick={()=> scrollTo('#educacion')}>educación</button>
-            <button className='nav-link-btn' onClick={()=> scrollTo('#personal')}>personal</button>
-            <button className='nav-link-btn' onClick={()=> scrollTo('#aprendizaje')}>aprensizaje</button>
-            <button className='nav-link-btn' onClick={()=> scrollTo('#ropero')}>ropero</button>
-            <button className='nav-link-btn' onClick={()=> scrollTo('#redes')}>redes</button>
-            <button className='nav-link-btn' onClick={()=> scrollTo('#mentores')}>mentores</button>
-            <button className='nav-link-btn' onClick={()=> scrollTo('#inspiracion')}>inspiración</button>
+            <button className='nav-link-btn' onClick={()=> scrollTo('#educacion')}>Educación</button>
+            <button className='nav-link-btn' onClick={()=> scrollTo('#personal')}>Personal</button>
+            <button className='nav-link-btn' onClick={()=> scrollTo('#aprendizaje')}>Aprensizaje</button>
+            <button className='nav-link-btn' onClick={()=> scrollTo('#ropero')}>Ropero</button>
+            <button className='nav-link-btn' onClick={()=> scrollTo('#redes')}>Redes</button>
+            <button className='nav-link-btn' onClick={()=> scrollTo('#mentores')}>Mentores</button>
+            <button className='nav-link-btn' onClick={()=> scrollTo('#inspiracion')}>Inspiración</button>
         </NavWrapper>
     )
 };
