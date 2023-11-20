@@ -1,13 +1,43 @@
 import { Link } from 'gatsby'
-import * as React from "react"
+// import React from "react"
 import './styles.css'
-import NavBar from './nav.jsx'
+import { NavBar, SideNav } from './nav.jsx'
 import { StaticImage } from 'gatsby-plugin-image'
+import React, { useEffect } from "react";
+
 
 const IndexPage = () => {
+
+useEffect(() => {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
+      } else {
+        entry.target.classList.remove("visible");
+      }
+    });
+  });
+
+  const divs = document.querySelectorAll(".fade-in");
+  divs.forEach((div) => {
+    observer.observe(div);
+  });
+
+  // Clean up the observer when the component unmounts
+  return () => {
+    divs.forEach((div) => {
+      observer.unobserve(div);
+    });
+  };
+}, []);
+
+
   return (
     <main>
       <NavBar />
+      <SideNav />
       <section className='header'>
         <StaticImage id='header-bg-img' src='../images/stock-img-protrait.jpeg'></StaticImage>
         <h1 className='header-headline'>Hola, yo soy Monica</h1>
@@ -44,24 +74,78 @@ const IndexPage = () => {
           <div className="blog">
             <h1>Blog</h1>
           </div>
+
           <div className="instagram">
             <h1>Instagram</h1>
-            <StaticImage id='ig-logo' src='../images/ig-logo.png'></StaticImage>
-            {/* <Link to='https://instagram.com' target='blank_'></Link> */}
+            <div className='hover-bg-ig'></div> 
+            <a href='https://instagram.com' target='_blank'>
+              <StaticImage id='ig-logo' src='../images/ig-logo.png' />
+            </a>
           </div>
-          <div className="twitter">
-            <h1>Twitter</h1>
-            <StaticImage id='x-logo' src='../images/twitter-logo.png'></StaticImage>
-            {/* <Link to='https://x.com' target='blank_'></Link> */}
-          </div>
+
           <div className="youtube">
-            <h1>Youtube</h1>
-            <StaticImage id='yt-logo' src='../images/Youtube_logo.png'></StaticImage>
-            {/* <Link to='https://youtube.com' target='blank_'></Link> */}
+            <a href='https://youtube.com' target='blank_'><StaticImage id='yt-logo' src='../images/youtube-icon.png'></StaticImage>
+            </a>
+            <div className='hover-bg-yt'></div>
+            <h1>Youtube</h1>  
+          </div>
+
+          <div className="twitter">
+            <h1>Twitter(X)</h1>
+            <div className='hover-bg-x'></div>
+            <a href='https://x.com' target='blank_'><StaticImage id='x-logo' src='../images/twitter-logo.png'></StaticImage>
+            </a>
           </div>
         </section>
+
+
         <section id="mentores" className="mentores main-section">
           <h1>Mentores</h1>
+
+          <div className="marco-default-mentores fade-in">
+            <StaticImage className='img-m' src='../images/stock-img-protrait.jpeg'></StaticImage>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab nihil porro earum iusto dolorem repellendus dolores possimus esse, fugit necessitatibus at ducimus. Cumque, architecto? Adipisci ipsam</p>
+          </div>
+          <div className="marco-default-mentores fade-in">
+            <StaticImage className='img-m' src='../images/stock-img-protrait.jpeg'></StaticImage>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab nihil porro earum iusto dolorem repellendus dolores possimus esse, fugit necessitatibus at ducimus. Cumque, architecto? Adipisci ipsam</p>
+          </div>
+          <div className="marco-default-mentores fade-in">
+            <StaticImage className='img-m' src='../images/stock-img-protrait.jpeg'></StaticImage>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab nihil porro earum iusto dolorem repellendus dolores possimus esse, fugit necessitatibus at ducimus. Cumque, architecto? Adipisci ipsam</p>
+          </div>
+          <div className="marco-default-mentores fade-in">
+            <StaticImage className='img-m' src='../images/stock-img-protrait.jpeg'></StaticImage>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab nihil porro earum iusto dolorem repellendus dolores possimus esse, fugit necessitatibus at ducimus. Cumque, architecto? Adipisci ipsam</p>
+          </div>
+
+          <div className="marco-default-mentores fade-in">
+            <StaticImage className='img-m' src='../images/stock-img-protrait.jpeg'></StaticImage>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab nihil porro earum iusto dolorem repellendus dolores possimus esse, fugit necessitatibus at ducimus. Cumque, architecto? Adipisci ipsam</p>
+          </div>
+          <div className="marco-default-mentores fade-in">
+            <StaticImage className='img-m' src='../images/stock-img-protrait.jpeg'></StaticImage>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab nihil porro earum iusto dolorem repellendus dolores possimus esse, fugit necessitatibus at ducimus. Cumque, architecto? Adipisci ipsam</p>
+          </div>
+          <div className="marco-default-mentores fade-in">
+            <StaticImage className='img-m' src='../images/stock-img-protrait.jpeg'></StaticImage>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab nihil porro earum iusto dolorem repellendus dolores possimus esse, fugit necessitatibus at ducimus. Cumque, architecto? Adipisci ipsam</p>
+          </div>
+          <div className="marco-default-mentores fade-in">
+            <StaticImage className='img-m' src='../images/stock-img-protrait.jpeg'></StaticImage>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab nihil porro earum iusto dolorem repellendus dolores possimus esse, fugit necessitatibus at ducimus. Cumque, architecto? Adipisci ipsam</p>
+          </div>
+
+          <div className="marco-default-mentores fade-in sLast">
+            <StaticImage className='img-m' src='../images/stock-img-protrait.jpeg'></StaticImage>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab nihil porro earum iusto dolorem repellendus dolores possimus esse, fugit necessitatibus at ducimus. Cumque, architecto? Adipisci ipsam</p>
+          </div>
+          <div className="marco-default-mentores fade-in last">
+            <StaticImage className='img-m' src='../images/stock-img-protrait.jpeg'></StaticImage>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab nihil porro earum iusto dolorem repellendus dolores possimus esse, fugit necessitatibus at ducimus. Cumque, architecto? Adipisci ipsam</p>
+          </div>
+
+
         </section>
         <section id="inspiracion" className="inspiracion main-section">
           <h1>Inspiración</h1>
@@ -73,4 +157,4 @@ const IndexPage = () => {
 
 export default IndexPage
 
-export const Head = () => <title>Home Page</title>
+export const Head = () => <title>Monica -Inicio</title>
