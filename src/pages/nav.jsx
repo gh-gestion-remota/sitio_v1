@@ -4,6 +4,37 @@ import styled from'styled-components';
 import scrollTo from 'gatsby-plugin-smoothscroll';
 import '@fontsource/rubik';
 
+export const query = graphql`
+{
+  allPrismicHome {
+    nodes {
+      data {
+        section_1_title {
+          text
+        }
+        section_2_title {
+          text
+        }
+        section_3_title {
+          text
+        }
+        section_4_title {
+          text
+        }
+        section_5_title {
+          text
+        }
+        section_6_title {
+          text
+        }
+        section_7_title {
+          text
+        }
+      }
+    }
+  }
+}`;
+
 const SideHandler = () =>{
     const target = document.querySelector('#side-selector');
     target.classList.toggle('side-nav-on');
@@ -26,7 +57,6 @@ const NavWrapper = styled.div`
     height: auto;
     padding: 10px 0px 10px 0px;
     background-color: white;
-    border-top: 2px solid black;
     border-bottom: 2px solid black;
     color: white;
     z-index: 3;
@@ -100,7 +130,7 @@ const NavWrapper = styled.div`
     // }
 `
 
-export const NavBar = () =>{
+export const NavBar = (props) =>{
     return(
         <NavWrapper>
             <button className='nav-link-btn' onClick={()=> scrollTo('#educacion')}>Educación</button>
@@ -130,12 +160,11 @@ const SideWrapper = styled.div`
     justify-content: right;
     right: -100%;
     z-index: 9999;
-    height: calc(100vh - 62px);
+    height: 100vh;
     width: calc(60dvw + 46px);
     transition: all 0.6s ease-in-out;
     border-top-left-radius: 10px 20px;
     border-bottom-left-radius: 20% 10%;
-
 
 
     .side-nav-close{
@@ -174,13 +203,14 @@ const SideWrapper = styled.div`
     .style-wrapper{
         background-color: white;
         width: 60dvw;
-        height: calc(100vh - 62px);
+        height: 100vh;
         display: grid;
         grid-template-rows:  repeat(7, auto) 1fr;
         gap: 0px;
         right: -100;
         border-top-left-radius: 10px 30px;
         border-bottom-left-radius: 40% 10%;
+
 
         .nav-link-btn{
             border: none;
