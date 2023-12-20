@@ -1,0 +1,23 @@
+[33mcommit eb95c8f465fd7867084c3df2a1558f025365d5db[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: benjamin <benjamin.astudillo.loyer@gmail.com>
+Date:   Wed Dec 6 12:04:17 2023 -0400
+
+    upload files to gh repository
+
+[33mcommit efa2f874376025a3b4620091e333aea6b627416a[m
+Author: benjamin <benjamin.astudillo.loyer@gmail.com>
+Date:   Mon Nov 20 13:48:24 2023 -0400
+
+    feat changes
+
+[33mcommit bda149a7123d0ca693d54a7f79e81a8a2bdfab31[m
+Author: benjamin <benjamin.astudillo.loyer@gmail.com>
+Date:   Wed Nov 8 13:23:01 2023 -0400
+
+    upload changes to remote repo
+
+[33mcommit 985621387962bf18a74fe46880d3012543264301[m
+Author: benjamin <benjamin.astudillo.loyer@gmail.com>
+Date:   Mon Nov 6 11:51:30 2023 -0400
+
+    commit initial files for prismic/gh setup

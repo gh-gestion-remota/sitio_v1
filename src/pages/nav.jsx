@@ -3,37 +3,8 @@ import React from 'react';
 import styled from'styled-components';
 import scrollTo from 'gatsby-plugin-smoothscroll';
 import '@fontsource/rubik';
+// import { graphql } from 'gatsby';
 
-export const query = graphql`
-{
-  allPrismicHome {
-    nodes {
-      data {
-        section_1_title {
-          text
-        }
-        section_2_title {
-          text
-        }
-        section_3_title {
-          text
-        }
-        section_4_title {
-          text
-        }
-        section_5_title {
-          text
-        }
-        section_6_title {
-          text
-        }
-        section_7_title {
-          text
-        }
-      }
-    }
-  }
-}`;
 
 const SideHandler = () =>{
     const target = document.querySelector('#side-selector');
@@ -133,13 +104,13 @@ const NavWrapper = styled.div`
 export const NavBar = (props) =>{
     return(
         <NavWrapper>
-            <button className='nav-link-btn' onClick={()=> scrollTo('#educacion')}>Educación</button>
-            <button className='nav-link-btn' onClick={()=> scrollTo('#personal')}>Personal</button>
-            <button className='nav-link-btn' onClick={()=> scrollTo('#aprendizaje')}>Aprensizaje</button>
-            <button className='nav-link-btn' onClick={()=> scrollTo('#ropero')}>Ropero</button>
-            <button className='nav-link-btn' onClick={()=> scrollTo('#redes')}>Redes</button>
-            <button className='nav-link-btn' onClick={()=> scrollTo('#mentores')}>Mentores</button>
-            <button className='nav-link-btn' onClick={()=> scrollTo('#inspiracion')}>Inspiración</button>
+            <button className='nav-link-btn' onClick={()=> scrollTo('#educacion')}>{props.titles[0]}</button>
+            <button className='nav-link-btn' onClick={()=> scrollTo('#personal')}>{props.titles[1]}</button>
+            <button className='nav-link-btn' onClick={()=> scrollTo('#aprendizaje')}>{props.titles[2]}</button>
+            <button className='nav-link-btn' onClick={()=> scrollTo('#ropero')}>{props.titles[3]}</button>
+            <button className='nav-link-btn' onClick={()=> scrollTo('#redes')}>{props.titles[4]}</button>
+            <button className='nav-link-btn' onClick={()=> scrollTo('#mentores')}>{props.titles[5]}</button>
+            <button className='nav-link-btn' onClick={()=> scrollTo('#inspiracion')}>{props.titles[6]}</button>
             <button className='side-nav-btn' onClick={()=> SideHandler()}>
                 <div className='side-icon-container'>
                     <div className='oval oval1'></div>
@@ -270,18 +241,18 @@ const SideWrapper = styled.div`
     }
 `
 
-export const SideNav = () =>{
+export const SideNav = (props) =>{
     return(
         <SideWrapper id='side-selector'>
             <button className='side-nav-close' onClick={()=> SideHandler()}></button>
             <div className="style-wrapper">
-                <button className='nav-link-btn' onClick={()=> SideLinkHandler('#educacion')}>Educación<div className='btn-bg'/></button>
-                <button className='nav-link-btn' onClick={()=> SideLinkHandler('#personal')}>Personal<div className='btn-bg'/></button>
-                <button className='nav-link-btn' onClick={()=> SideLinkHandler('#aprendizaje')}>Aprensizaje<div className='btn-bg'/></button>
-                <button className='nav-link-btn' onClick={()=> SideLinkHandler('#ropero')}>Ropero<div className='btn-bg'/></button>
-                <button className='nav-link-btn' onClick={()=> SideLinkHandler('#redes')}>Redes<div className='btn-bg'/></button>
-                <button className='nav-link-btn' onClick={()=> SideLinkHandler('#mentores')}>Mentores<div className='btn-bg'/></button>
-                <button className='nav-link-btn' onClick={()=> SideLinkHandler('#inspiracion')}>Inspiración<div className='btn-bg'/></button>
+                <button className='nav-link-btn' onClick={()=> SideLinkHandler('#educacion')}>{props.titles[0]}<div className='btn-bg'/></button>
+                <button className='nav-link-btn' onClick={()=> SideLinkHandler('#personal')}>{props.titles[1]}<div className='btn-bg'/></button>
+                <button className='nav-link-btn' onClick={()=> SideLinkHandler('#aprendizaje')}>{props.titles[2]}<div className='btn-bg'/></button>
+                <button className='nav-link-btn' onClick={()=> SideLinkHandler('#ropero')}>{props.titles[3]}<div className='btn-bg'/></button>
+                <button className='nav-link-btn' onClick={()=> SideLinkHandler('#redes')}>{props.titles[4]}<div className='btn-bg'/></button>
+                <button className='nav-link-btn' onClick={()=> SideLinkHandler('#mentores')}>{props.titles[5]}<div className='btn-bg'/></button>
+                <button className='nav-link-btn' onClick={()=> SideLinkHandler('#inspiracion')}>{props.titles[6]}<div className='btn-bg'/></button>
                 <div className='fillout'/>
             </div>
         </SideWrapper>

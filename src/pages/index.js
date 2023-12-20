@@ -2,9 +2,9 @@ import { Link } from 'gatsby'
 // import React from "react"
 import './styles.css'
 import { NavBar, SideNav } from './nav.jsx'
-import { GatsbyImage, getImage, StaticImage } from 'gatsby-plugin-image'
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import React, { useEffect } from "react";
-import { useStaticQuery, graphql } from 'gatsby';
+import { graphql } from 'gatsby';
 
 export const query = graphql`
 {
@@ -86,10 +86,31 @@ export const query = graphql`
         header_hero_title {
           text
         }
+        body {
+          ... on PrismicHomeDataBodyMentor {
+            items {
+              mentor_title {
+                text
+              }
+              mentor_paragraph {
+                text
+              }
+              mentor_img {
+                gatsbyImageData
+              }
+            }
+            primary {
+              section_6_title {
+                text
+              }
+            }
+          }
+        }
       }
     }
   }
 }`;
+
 
 const IndexPage = (props) => {
 
@@ -125,12 +146,24 @@ const IndexPage = (props) => {
     };  
   }, []);
   
-  // console.log('log => ', props.data.allPrismicHome.nodes[0].data.sm_entry_2[0].sm_title_2.text);
+  const mentoresArray = props.data.allPrismicHome.nodes[0].data.body[0].items ;
+
+  const titles = [
+    props.data.allPrismicHome.nodes[0].data.section_1_title.text,
+    props.data.allPrismicHome.nodes[0].data.section_2_title.text,
+    props.data.allPrismicHome.nodes[0].data.section_3_title.text,
+    props.data.allPrismicHome.nodes[0].data.section_4_title.text,
+    props.data.allPrismicHome.nodes[0].data.section_5_title_sm.text,
+    props.data.allPrismicHome.nodes[0].data.body[0].primary.section_6_title.text,
+    props.data.allPrismicHome.nodes[0].data.section_7_title.text,
+  ];
+
+  // console.log('log => ', mentoresArray);
 
   return (
     <main>
-      <NavBar />
-      <SideNav />
+      <NavBar titles={titles}/>
+      <SideNav titles={titles}/>
       <section className='header'>
         <GatsbyImage id='header-bg-img' image={getImage(props.data.allPrismicHome.nodes[0].data.imagen_fondo_encabezado.gatsbyImageData)} />
         <h1 className='header-headline'>{props.data.allPrismicHome.nodes[0].data.header_hero_title.text}</h1>
@@ -147,28 +180,28 @@ const IndexPage = (props) => {
           <h1 className='default-header'>{props.data.allPrismicHome.nodes[0].data.section_2_title.text}</h1>
           <div className="personal-wrapper">
 
-            <p className='default-paragraph personal-p-1'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt suscipit molestias quam in minima amet architecto consequuntur nobis possimus eveniet odio fugit soluta ipsum tempora, delectus dolorem? Minima animi magnam</p>
+            <p className='default-paragraph personal-p-1'>{props.data.allPrismicHome.nodes[0].data.section_2_paragraph_1.text}</p>
             
-            <p className='default-paragraph personal-p-2'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt suscipit molestias quam in minima amet architecto consequuntur nobis possimus eveniet odio fugit soluta ipsum tempora, delectus dolorem? Minima animi magnam</p>
+            <p className='default-paragraph personal-p-2'>{props.data.allPrismicHome.nodes[0].data.section_2_paragraph_2.text}</p>
           </div>
         </section>
         
         
         <section id="aprendizaje" className="aprendizaje main-section">
           <h1 className='default-header'>{props.data.allPrismicHome.nodes[0].data.section_3_title.text}</h1>
-          <p className="default=paragraph">aprende directamente de mi, en base a todas mis experiencias y conocimientos</p>
+          <p className="default=paragraph">{props.data.allPrismicHome.nodes[0].data.section_3_paragraph.text}</p>
           <Link to='' id='btn-other-half'>acceder</Link>
         </section> 
 
         <section id="ropero" className="ropero main-section">
           <h1 className='default-header'>{props.data.allPrismicHome.nodes[0].data.section_4_title.text}</h1>
-          <p>Averigua acerca del tipo de ropa estamos vendiendo</p>
+          <p>{props.data.allPrismicHome.nodes[0].data.section_4_paragraph.text}</p>
           <Link id='shop-btn' to=''>Ver stock</Link>
         </section>
 
         <section id="redes" className="redes main-section">
           <div className="blog">
-            <h1>{props.data.allPrismicHome.nodes[0].data.section_5_title.text}</h1>
+            <h1>{props.data.allPrismicHome.nodes[0].data.section_5_title_sm.text}</h1>
           </div>
           <div className="instagram">
             <h1 onClick={()=>clickMedia("clic-ig")}>{props.data.allPrismicHome.nodes[0].data.sm_entry_1[0].sm_title_1.text}</h1>
@@ -196,54 +229,16 @@ const IndexPage = (props) => {
         </section>
 
         <section id="mentores" className="mentores main-section">
-          <h1 className='default-header'>{props.data.allPrismicHome.nodes[0].data.section_6_title.text}</h1>
+          <h1 className='default-header'>{props.data.allPrismicHome.nodes[0].data.body[0].primary.section_6_title.text}</h1>
+            {mentoresArray.map((obj, index) => (
+              <div className="marco-default-mentores fade-in" key={index}>
+                <GatsbyImage className='img-m' image={obj.mentor_img.gatsbyImageData}></GatsbyImage>
+                <h2>{obj.mentor_title.text}</h2>
+                <p>{obj.mentor_paragraph.text}</p>
+              </div>
+            ))}
 
-          <div className="marco-default-mentores fade-in">
-            <StaticImage className='img-m' src='../images/stock-img-protrait.jpeg'></StaticImage>
-            <h2>nombre</h2>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab nihil porro earum iusto dolorem repellendus dolores possimus esse, fugit necessitatibus at ducimus. Cumque, architecto? Adipisci ipsam</p>
-          </div>
-          <div className="marco-default-mentores fade-in">
-            <StaticImage className='img-m' src='../images/stock-img-protrait.jpeg'></StaticImage>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab nihil porro earum iusto dolorem repellendus dolores possimus esse, fugit necessitatibus at ducimus. Cumque, architecto? Adipisci ipsam</p>
-          </div>
-          <div className="marco-default-mentores fade-in">
-            <StaticImage className='img-m' src='../images/stock-img-protrait.jpeg'></StaticImage>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab nihil porro earum iusto dolorem repellendus dolores possimus esse, fugit necessitatibus at ducimus. Cumque, architecto? Adipisci ipsam</p>
-          </div>
-          <div className="marco-default-mentores fade-in">
-            <StaticImage className='img-m' src='../images/stock-img-protrait.jpeg'></StaticImage>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab nihil porro earum iusto dolorem repellendus dolores possimus esse, fugit necessitatibus at ducimus. Cumque, architecto? Adipisci ipsam</p>
-          </div>
-
-          <div className="marco-default-mentores fade-in">
-            <StaticImage className='img-m' src='../images/stock-img-protrait.jpeg'></StaticImage>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab nihil porro earum iusto dolorem repellendus dolores possimus esse, fugit necessitatibus at ducimus. Cumque, architecto? Adipisci ipsam</p>
-          </div>
-          <div className="marco-default-mentores fade-in">
-            <StaticImage className='img-m' src='../images/stock-img-protrait.jpeg'></StaticImage>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab nihil porro earum iusto dolorem repellendus dolores possimus esse, fugit necessitatibus at ducimus. Cumque, architecto? Adipisci ipsam</p>
-          </div>
-          <div className="marco-default-mentores fade-in">
-            <StaticImage className='img-m' src='../images/stock-img-protrait.jpeg'></StaticImage>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab nihil porro earum iusto dolorem repellendus dolores possimus esse, fugit necessitatibus at ducimus. Cumque, architecto? Adipisci ipsam</p>
-          </div>
-          <div className="marco-default-mentores fade-in">
-            <StaticImage className='img-m' src='../images/stock-img-protrait.jpeg'></StaticImage>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab nihil porro earum iusto dolorem repellendus dolores possimus esse, fugit necessitatibus at ducimus. Cumque, architecto? Adipisci ipsam</p>
-          </div>
-
-          <div className="marco-default-mentores fade-in sLast">
-            <StaticImage className='img-m' src='../images/stock-img-protrait.jpeg'></StaticImage>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab nihil porro earum iusto dolorem repellendus dolores possimus esse, fugit necessitatibus at ducimus. Cumque, architecto? Adipisci ipsam</p>
-          </div>
-          <div className="marco-default-mentores fade-in last">
-            <StaticImage className='img-m' src='../images/stock-img-protrait.jpeg'></StaticImage>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab nihil porro earum iusto dolorem repellendus dolores possimus esse, fugit necessitatibus at ducimus. Cumque, architecto? Adipisci ipsam</p>
-          </div>
-
-
-        </section>
+        </section>  
         <section id="inspiracion" className="inspiracion main-section">
           <h1 className='default-header'>{props.data.allPrismicHome.nodes[0].data.section_7_title.text}</h1>
         </section>
@@ -252,6 +247,6 @@ const IndexPage = (props) => {
   )
 }
 
-export default IndexPage
+export default IndexPage;
 
-export const Head = () => <title>Monica -Inicio</title>
+export const Head = (props) => <title>{props.data.allPrismicHome.nodes[0].data.header_hero_title.text}</title>
